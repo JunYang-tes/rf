@@ -1,9 +1,13 @@
-(local types (require :signal))
-(local talkback (require :talkback)) 
+(local -folder (-> ...
+                   (: :match "(.-)[^%.]+$"))) 
+(fn lrequire [name] (require (.. -folder name)))
+
+(local types (lrequire :signal))
+(local talkback (lrequire :talkback)) 
 (local {: make-start
         : make-push
-        : make-end } (require :signal))
-(local {: subscribe} (require :subscribe))
+        : make-end } (lrequire :signal))
+(local {: subscribe} (lrequire :subscribe))
 (import-macros {: match-signal} :signal-m) 
 (import-macros {: make-src} :source-m) 
 

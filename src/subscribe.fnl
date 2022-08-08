@@ -1,5 +1,9 @@
+(local -folder (-> ...
+                   (: :match "(.-)[^%.]+$"))) 
+(fn lrequire [name] (require (.. -folder name)))
+
 (import-macros {: match-signal } :signal-m)
-(local talkback (require :talkback)) 
+(local talkback (lrequire :talkback)) 
 (fn subscribe [src next close]
   (local state {:tb (fn []) :closed false})
   (src (fn [tb-signal]

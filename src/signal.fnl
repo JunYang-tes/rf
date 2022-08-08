@@ -1,7 +1,11 @@
+(local -folder (-> ...
+                   (: :match "(.-)[^%.]+$"))) 
+(fn lrequire [name] (require (.. -folder name)))
+
 (local signal {:start 0 :push 1 :end 2})
 
 (fn view [v]
-  (local f (require :fennel))
+  (local f (lrequire :fennel))
   (f.view v)) 
 
 (fn make-signal [type data] {: type : data}) 
